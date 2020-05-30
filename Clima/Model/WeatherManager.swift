@@ -10,7 +10,7 @@ import Foundation
 
 protocol WeatherManagerDelegate {
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel)
-    func didFailWithError(_ error: Error!)
+    func didFailWithError(_ error: Error)
 }
 
 struct WeatherManager {
@@ -20,6 +20,11 @@ struct WeatherManager {
     
     func fetchWeather(cityName: String) {
         let urlString = "\(weatherURL)&q=\(cityName)"
+        performRequest(with: urlString)
+    }
+    
+    func fetchWeather(lat: Double, lon: Double) {
+        let urlString = "\(weatherURL)&lat=\(lat)&lon=\(lon)"
         performRequest(with: urlString)
     }
     
